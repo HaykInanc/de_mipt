@@ -67,7 +67,7 @@ select
 	id, 
 	title, 
 	quantity
-from goods
+from goods_1
 
 -- объединить данные из goods и goods_1 (все записи)
 
@@ -81,7 +81,7 @@ select
 	id, 
 	title, 
 	quantity
-from goods
+from goods_1
 
 -- объединить данные из goods и goods_1, указав price, где это возможно
 
@@ -97,7 +97,7 @@ select
 	title, 
 	quantity,
 	price
-from goods
+from goods_1
 
 ```
 ## Join 
