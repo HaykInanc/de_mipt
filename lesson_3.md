@@ -35,7 +35,7 @@ from table_2
 create table goods(
 	id integer primary key,
 	title varchar(128),
-	quantity integer check(price between 0 and 10)
+	quantity integer check(quantity between 0 and 10)
 );
 
 insert into goods (id, title, quantity) values(1, 'велосипед', 4);
@@ -47,13 +47,13 @@ create table goods_1(
 	id integer primary key,
 	title varchar(128),
 	price integer,
-	quantity integer check(price between 0 and 10)
+	quantity integer check(quantity between 0 and 10)
 );
 
-insert into goods (id, title, price, quantity) values(1, 'велосипед', 12000, 4);
-insert into goods (id, title, price, quantity) values(2, 'лыжи', 10000, 5);
-insert into goods (id, title, price, quantity) values(3, 'коньки', 6000, 7);
-insert into goods (id, title, price, quantity) values(4, 'скейт', 10000, 2);
+insert into goods_1 (id, title, price, quantity) values(1, 'велосипед', 12000, 4);
+insert into goods_1 (id, title, price, quantity) values(2, 'лыжи', 10000, 5);
+insert into goods_1 (id, title, price, quantity) values(3, 'коньки', 6000, 7);
+insert into goods_1 (id, title, price, quantity) values(4, 'скейт', 10000, 2);
 
 -- объединить данные из goods и goods_1 (без дублей)
 
@@ -67,7 +67,7 @@ select
 	id, 
 	title, 
 	quantity
-from goods
+from goods_1
 
 -- объединить данные из goods и goods_1 (все записи)
 
@@ -81,7 +81,7 @@ select
 	id, 
 	title, 
 	quantity
-from goods
+from goods_1
 
 -- объединить данные из goods и goods_1, указав price, где это возможно
 
@@ -97,7 +97,7 @@ select
 	title, 
 	quantity,
 	price
-from goods
+from goods_1
 
 ```
 ## Join 
@@ -113,6 +113,28 @@ Join позволяет объединять данные из таблиц "Г�
 Как вы могли заметить, в обоих таблицах присутствует поле ID которое однозначно определяет пользователя, по нему мы и будем производить join.
 
 ```sql
+create table names(
+	id integer primary key,
+	name varchar(128)
+);
+
+insert into names (id, name) values(1, 'Vasiliy');
+insert into names (id, name) values(2, 'Peter');
+insert into names (id, name) values(3, 'Anna');
+
+select * from names;
+
+create table ages(
+	id integer primary key,
+	age integer check(age between 0 and 70)
+);
+
+insert into ages (id, age) values(1, 21);
+insert into ages (id, age) values(2, 22);
+insert into ages (id, age) values(3, 23);
+
+select * from ages;
+
 select
 	t1.id,
 	t1.name,
