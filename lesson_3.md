@@ -50,10 +50,10 @@ create table goods_1(
 	quantity integer check(price between 0 and 10)
 );
 
-insert into goods (id, title, price, quantity) values(1, 'велосипед', 12000, 4);
-insert into goods (id, title, price, quantity) values(2, 'лыжи', 10000, 5);
-insert into goods (id, title, price, quantity) values(3, 'коньки', 6000, 7);
-insert into goods (id, title, price, quantity) values(4, 'скейт', 10000, 2);
+insert into goods_1 (id, title, price, quantity) values(1, 'велосипед', 12000, 4);
+insert into goods_1 (id, title, price, quantity) values(2, 'лыжи', 10000, 5);
+insert into goods_1 (id, title, price, quantity) values(3, 'коньки', 6000, 7);
+insert into goods_1 (id, title, price, quantity) values(4, 'скейт', 10000, 2);
 
 -- объединить данные из goods и goods_1 (без дублей)
 
