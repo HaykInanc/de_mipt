@@ -113,6 +113,28 @@ Join позволяет объединять данные из таблиц "Г�
 Как вы могли заметить, в обоих таблицах присутствует поле ID которое однозначно определяет пользователя, по нему мы и будем производить join.
 
 ```sql
+create table names(
+	id integer primary key,
+	name varchar(128)
+);
+
+insert into names (id, name) values(1, 'Vasiliy');
+insert into names (id, name) values(2, 'Peter');
+insert into names (id, name) values(3, 'Anna');
+
+select * from names;
+
+create table ages(
+	id integer primary key,
+	age integer check(age between 0 and 70)
+);
+
+insert into ages (id, age) values(1, 21);
+insert into ages (id, age) values(2, 22);
+insert into ages (id, age) values(3, 23);
+
+select * from ages;
+
 select
 	t1.id,
 	t1.name,
