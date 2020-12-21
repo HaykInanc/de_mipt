@@ -35,7 +35,7 @@ from table_2
 create table goods(
 	id integer primary key,
 	title varchar(128),
-	quantity integer check(price between 0 and 10)
+	quantity integer check(quantity between 0 and 10)
 );
 
 insert into goods (id, title, quantity) values(1, 'велосипед', 4);
@@ -47,7 +47,7 @@ create table goods_1(
 	id integer primary key,
 	title varchar(128),
 	price integer,
-	quantity integer check(price between 0 and 10)
+	quantity integer check(quantity between 0 and 10)
 );
 
 insert into goods_1 (id, title, price, quantity) values(1, 'велосипед', 12000, 4);
