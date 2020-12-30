@@ -220,7 +220,7 @@ select
             then case  
                 when instr(email, ' ') = 0 
                     then null 
-                else substr(email,instr(email, ' '+1)) 
+                else substr(email,instr(email, ' ')+1) 
             end  
         else email 
     end as new_phone,
