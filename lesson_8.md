@@ -82,9 +82,7 @@
 
 Данный тип диаграммы позволяет отображать сущности и связи между ними. Это, пожалуй, основной артефакт, позволяющий быстро познакомиться с базой или ее областью на необходимом уровне детализации. 
 
-Небольшой пример ER- диаграммы:
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/33d8ddf8-c461-4e29-a5e0-ee370b293368/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/33d8ddf8-c461-4e29-a5e0-ee370b293368/Untitled.png)
 
 **Задание**
 
