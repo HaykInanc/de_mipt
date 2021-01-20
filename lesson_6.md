@@ -285,3 +285,68 @@ from (
 Необходимо загрузить данные и очистить их.
 
 https://raw.githubusercontent.com/HaykInanc/mtsData/master/sql_for_oracle.sql
+
+## Решение 
+
+Нам необходимо решить практическое задание с прошлой пары с использованием регулярных выражений. 
+
+```sql
+select  
+    case  
+        when substr(gender, 1, 1) = 'F' then 1 
+        else 0 
+    end as gender, 
+    regexp_substr(
+                trim(FIRST_NAME || ' ' || LAST_NAME), '\w+') as first_name, 
+    trim(
+                regexp_substr(
+                        trim(FIRST_NAME || ' ' || LAST_NAME), '\s\w+')
+        ) as last_name, 
+    regexp_substr(email, '^[a-zA-Z\.\_0-9\-]+\@[a-zA-Z\.]+\.[a-zA-Z]{2,4}') as email_, 
+    case
+        when regexp_substr(email, '(^|\s)[0-9+ \-]+') is not null
+            then '+7'|| substr(
+                                                        regexp_replace(
+                                                                regexp_substr(email, '(^|\s)[0-9+ \-]+')
+                                                              ,'\D'), 
+                                                2)
+    end as phone,
+    email 
+from dataSource;
+```
+
+Давайте попунктно разберем каждое значение в select
+
+1. Поле gender преобразовывается достаточно легко и regexp тут избыточен.
+2. Поля first_name и last_name преобразуются следующим образом
+    - мы приводим значение всех строк к одному виду сделав контатинацию и trim
+    - далее все что с лева от пробела, это значение для first_name
+    - все что с права, для last_name
+3. Поле email мы получаем с помощью регулярного выражения, которое сформировали на прошлых задяниях
+4. phone получаем как множество цифр(пробелов, - и _) после пробельного символа или начала строки. Далее мы отбрасываем все не цифровые символы и добавляем +7 в начало.
+В заключении я хотел бы отметить, что регулярные выражения, не смотря на свою функциональность, имеют ряд недостатков:
+- они делают код сложнее
+- они работают дольше, чем строковые функции
+
+Исходя из этого используйте регулярные выражения только в тех случаях, где использование строковых функций либо не возможно, либо сильно нагружает скрипт.
+
+Для справки предлагаю вам использовать [шпаргалку](https://i.imgur.com/UTlGckN.png) по синтаксису regexp и [онлайн анализатор](https://regexr.com/) regexp выражений. 
+
+**Второй вариант**
+
+```sql
+select 
+    case  
+        when substr(gender, 1, 1) = 'F' then 1 
+        else 0 
+    end as gender,
+    regexp_substr(trim(first_name || ' ' || last_name), '\w+') as first_name,
+    trim(regexp_substr(trim(first_name || ' ' || last_name), '\s\w+')) as last_name,
+    regexp_substr(email, '^[a-zA-Z\.\_0-9\-]+\@[a-zA-Z\.]+\.[a-zA-Z]{2,4}') as email,
+    case 
+        when regexp_like(substr(email, -1), '\d') then
+            '+7' || regexp_substr(regexp_replace(EMAIL,'[^0-9]'), '\d{10}$') 
+    end as phone,
+    email as last_email
+from dataSource
+```
